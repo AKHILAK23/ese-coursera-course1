@@ -9,13 +9,20 @@
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file ASSIGNMENT 1
+ * @brief statistical analysis
+
+ *It has a couple of functions that can analyze an array of 
+ * unsigned char data items and report analytics on the maximum, minimum, mean, 
+ * and median of the data set. In addition,  need to reorder this data set 
+ * from large to small. All statistics should be rounded down to the nearest integer. 
+ * After analysis and sorting is done, need to print that data to the screen 
+ * in nicely formatted presentation.
  *
- * <Add Extended Description Here>
+ * 
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * @author Akhila K
+ * @date 17/07/2022
  *
  */
 
@@ -38,6 +45,98 @@ void main() {
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
 
+  int median, mean, maximum, minimum;                                
+
+	
+	print_array(test, SIZE);
+
+	printf("\n> Ordering array...\n");
+	sort_array(test, SIZE);
+	printf("<Ordered Data Array>\n");
+	print_array(test, SIZE);
+
+	printf("\n> Calculate and show statistics...\n");
+	median = find_median(test, SIZE);
+	mean = find_mean(test, SIZE);
+	maximum = find_maximum(test, SIZE);
+	minimum = find_minimum(test, SIZE);
+  print_statistics(median, mean, maximum, minimum);
+}
+void print_statistics() {
+
+void print_statistics(int median, int mean, int maximum, int minimum) {
+	 printf("<Statistics>\n");
+	 printf("> Median: %5d\n", median);
+	 printf("> Mean: %7d\n", mean);
+	 printf("> Maximum: %4d\n", maximum);
+	 printf("> Minimum: %4d\n", minimum);
+}
 }
 
-/* Add other Implementation File Code Here */
+void print_array(unsigned char *data, int len) {
+
+	printf("[ ");
+	for (int i = 0; i < len; ++i)
+	{
+		if (i < len-1) {
+			printf("%d, ", data[i]);
+		} 
+                else {
+			printf("%d", data[i]);
+		}
+	}
+	printf(" ]\n");
+}
+
+int find_median(unsigned char *data, int len) {
+
+	if (len % 2 == 0) {
+		return ( data[(len/2)] + data[(len/2)+1] ) / 2;
+	} 
+        else {
+		return data[(len/2)+1];
+	}
+}
+
+int find_mean(unsigned char *data, int len) {
+
+	int sum = 0;
+	for (int i = 0; i < len; ++i)
+	{
+		sum += data[i];
+	}
+	return sum / len;
+}
+
+int find_maximum(unsigned char *data, int len) {
+
+	return data[0];
+}
+int find_minimum(unsigned char *data, int len) {
+
+	return data[len-1];
+}
+
+void sort_array(unsigned char *data, int len) {
+
+	int aux;
+	for (int i = 0; i < len-1; i++) {
+		for (int j = i+1; j < len; ++j)
+		{
+			if (data[i] < data[j]) {
+				aux = data[i];
+				data[i] = data[j];
+				data[j] = aux; 
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+  
